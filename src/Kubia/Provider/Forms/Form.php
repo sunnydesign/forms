@@ -4,7 +4,6 @@ namespace Kubia\Provider\Forms;
 
 use Ramsey\Uuid\Uuid;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Collection;
 
 class Form extends Model
 {
