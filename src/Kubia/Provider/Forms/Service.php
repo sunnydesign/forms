@@ -240,10 +240,12 @@ class Service extends Provider
         $offset = $limit * ($page - 1);
 
         // Get forms from DB considering client id
+        $forms = Form::take($limit)->skip($offset);
+
         if(property_exists($data, 'user') && property_exists($data->user, 'id'))
-            $forms = Form::whereClientId($data->user->id)->take($limit)->skip($offset)->get();
-        else
-            $forms = Form::take($limit)->skip($offset)->get();
+            $forms->whereClientId($data->user->id);
+
+        $forms = $forms->get();
 
         // If found forms
         if(!empty($forms)) {
