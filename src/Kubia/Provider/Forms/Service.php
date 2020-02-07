@@ -40,21 +40,18 @@ class Service extends Provider
      */
     public function createTemplate(object $parameters, object $data, object $headers): object
     {
-        $this->checkParameters(['form'], $data);
-        $this->checkParameters(['template'], $data->form);
-        $this->checkParameters(['name', 'state', 'data'], $data->form->template);
-
-        $incoming_template = $data->form->template;
+        $this->checkParameters(['template'], $data);
+        $this->checkParameters(['name', 'state', 'data'], $data->template);
 
         // Save template into DB
         $template = Template::create([
-            'name' => $incoming_template->name,
-            'state' => $incoming_template->state,
-            'type' => $incoming_template->type,
-            'data' => json_encode($incoming_template->data)
+            'name' => $data->template->name,
+            'state' => $data->template->state,
+            'type' => $data->template->type,
+            'data' => json_encode($data->template->data)
         ]);
 
-        $data->form->template->uuid = $template->uuid;
+        $data->template->uuid = $template->uuid;
 
         return $data;
     }
@@ -69,8 +66,6 @@ class Service extends Provider
      */
     public function getTemplateList(object $parameters, object $data, object $headers): object
     {
-        $data->form = (object)[];
-
         // Set limit and offset
         $page = $parameters->page ?? 1;
         $limit = $parameters->limit ?? self::LIMIT;
@@ -79,7 +74,7 @@ class Service extends Provider
         // Get templates from DB
         $templates = Template::take($limit)->skip($offset)->get();
 
-        // If found forms
+        // If found templates
         if(!empty($templates)) {
             foreach($templates as $template) {
                 $templates_list[] = [
@@ -93,7 +88,7 @@ class Service extends Provider
             }
         }
 
-        $data->form->templates = $templates_list ?? [];
+        $data->templates = $templates_list ?? [];
 
         // Count and pages
         $count = $templates->count();
@@ -116,8 +111,7 @@ class Service extends Provider
      */
     public function getTemplate(object $parameters, object $data, object $headers): object
     {
-        $data->form = (object)[];
-        $data->form->templates = [];
+        $data->template = [];
 
         $this->checkParameters(['uuid'], $parameters);
 
@@ -126,7 +120,7 @@ class Service extends Provider
 
         // If found form
         if(!empty($template)) {
-            $data->form->templates[] = [
+            $data->template = [
                 'id' => $template->id,
                 'uuid' => $template->uuid,
                 'name' => $template->name,
@@ -150,31 +144,19 @@ class Service extends Provider
      */
     public function updateTemplate(object $parameters, object $data, object $headers): object
     {
-        $this->checkParameters(['form'], $data);
-        $this->checkParameters(['template'], $data->form);
-        $this->checkParameters(['name', 'state', 'data'], $data->form->template);
+        $this->checkParameters(['template'], $data);
+        $this->checkParameters(['name', 'state', 'data'], $data->template);
         $this->checkParameters(['uuid'], $parameters);
-
-        $incoming_template = $data->form->template;
 
         // Save form in to DB
         $template = Template::whereUuid($parameters->uuid)->first();
-        $template->name = $incoming_template->name;
-        $template->state = $incoming_template->state;
-        $template->type = $incoming_template->type;
-        $template->data = json_encode($incoming_template->data);
+        $template->name = $data->template->name;
+        $template->state = $data->template->state;
+        $template->type = $data->template->type;
+        $template->data = json_encode($data->template->data);
         $template->save();
 
-        $data->form->templates[] = [
-            'id' => $template->id,
-            'uuid' => $template->uuid,
-            'name' => $template->name,
-            'state' => $template->state,
-            'type' => $template->type,
-            'data' => json_decode($template->data)
-        ];
-
-        //$data->form->template->uuid = $template->uuid;
+        $data->template->uuid = $template->uuid;
 
         return $data;
     }
@@ -217,8 +199,7 @@ class Service extends Provider
     {
         $this->checkParameters(['user', 'form'], $data);
         $this->checkParameters(['id'], $data->user);
-        $this->checkParameters(['form'], $data->form);
-        $this->checkParameters(['data'], $data->form->form);
+        $this->checkParameters(['data'], $data->form);
 
         // @todo:form validation
 
@@ -234,11 +215,11 @@ class Service extends Provider
             'template_id' => $template->id,
             'client_id' => $data->user->id,
             'state_id' => $state->id,
-            'data' => json_encode($data->form->form->data)
+            'data' => json_encode($data->form->data)
         ]);
 
-        $data->form->form->state = $state->name;
-        $data->form->form->uuid = $form->uuid;
+        $data->form->state = $state->name;
+        $data->form->uuid = $form->uuid;
 
         return $data;
     }
@@ -253,8 +234,6 @@ class Service extends Provider
      */
     public function getFormList(object $parameters, object $data, object $headers): object
     {
-        $data->form = (object)[];
-
         // Set limit and offset
         $page = $parameters->page ?? 1;
         $limit = $parameters->limit ?? self::LIMIT;
@@ -278,7 +257,7 @@ class Service extends Provider
             }
         }
 
-        $data->form->forms = $forms_list ?? [];
+        $data->forms = $forms_list ?? [];
 
         // Count and pages
         $count = $forms->count();
@@ -301,8 +280,7 @@ class Service extends Provider
      */
     public function getForm(object $parameters, object $data, object $headers): object
     {
-        $data->form = (object)[];
-        $data->form->forms = [];
+        $data->form = [];
 
         $this->checkParameters(['uuid'], $parameters);
 
@@ -311,7 +289,7 @@ class Service extends Provider
 
         // If found form
         if(!empty($form)) {
-            $data->form->forms[] = [
+            $data->form = [
                 'id' => $form->id,
                 'uuid' => $form->uuid,
                 'state' => $form->state->name,
@@ -334,30 +312,20 @@ class Service extends Provider
     public function updateForm(object $parameters, object $data, object $headers): object
     {
         $this->checkParameters(['form'], $data);
-        $this->checkParameters(['form'], $data->form);
-        $this->checkParameters(['state', 'data'], $data->form->form);
+        $this->checkParameters(['state', 'data'], $data->form);
         $this->checkParameters(['uuid'], $parameters);
 
-        $incoming_form = $data->form->form;
-
-        $state = State::whereName($incoming_form->state)->first();
+        $state = State::whereName($data->form->state)->first();
         if(!$state)
             throw BusinessException('Incorrect state name');
 
         // Save form in to DB
         $form = Form::whereUuid($parameters->uuid)->first();
         $form->state_id = $state->id;
-        $form->data = json_encode($incoming_form->data);
+        $form->data = json_encode($data->form->data);
         $form->save();
 
-        $data->form->forms[] = [
-            'id' => $form->id,
-            'uuid' => $form->uuid,
-            'state' => $form->state->name,
-            'data' => json_decode($form->data)
-        ];
-
-        //$data->form->form->uuid = $form->uuid;
+        $data->form->uuid = $form->uuid;
 
         return $data;
     }
