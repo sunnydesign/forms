@@ -1,0 +1,9 @@
+version: '3'
+services:
+  forms:
+    build: .
+    image: docker.quancy.com.sg/forms:${VERSION-latest}
+    network_mode: bridge
+    restart: always
+    env_file:
+      - .env

@@ -1,0 +1,33 @@
+{
+  "name": "kubia/mod-forms",
+  "description": "Forms for customers and corporates",
+  "keywords": ["forms"],
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Andrey Mokretsov",
+      "email": "am@kubia.com",
+      "homepage": "https://gitlab.com/am20"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://lib.kubia.dev"
+    }
+  ],
+  "require": {
+    "php-amqplib/php-amqplib": "2.11.0",
+    "illuminate/database": "^6.13.1",
+    "illuminate/events": "^6.13.1",
+    "ramsey/uuid": "^3.9",
+    "kubia/libs": "dev-master",
+    "kubia/logger": "0.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Kubia\\": "src/Kubia",
+      "Kubia\\Provider\\Forms\\": "src/Kubia/Provider/Forms"
+    }
+  }
+}

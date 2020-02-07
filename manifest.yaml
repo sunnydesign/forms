@@ -1,0 +1,9 @@
+application:
+  name: forms
+  title: Forms Engine for customers and corporates.
+  author: Andrey Mokretsov
+  queues: 
+    in:
+      - forms_in
+    out:
+      - forms_out
