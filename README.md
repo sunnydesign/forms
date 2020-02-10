@@ -4,12 +4,12 @@ Form engine microservice is used for CRUD operations with form templates and for
 Serves requests from back-office and front-end.
 
 # Available commands
-- **getTemplateList** - Get template list with pagination
+- **getTemplates** - Get template list with pagination
 - **getTemplate** - Get template by uuid
 - **createTemplate** - Add new form template into DB
 - **updateTemplate** - Update template by uuid
 - **deleteTemplate** - Delete template from DB
-- **getFormList** - Get form list optionally considering client id
+- **getForms** - Get form list optionally considering client id
 - **getForm** - Get form by uuid
 - **createForm** - Create a form based on a template and save it into DB
 - **updateForm** - Update form by uuid
@@ -179,7 +179,7 @@ outgoing message
 }
 ```
 
-## getTemplateList
+## getTemplates
 
 incoming message
 
@@ -191,7 +191,7 @@ incoming message
   },
   "data": {},
   "headers": {
-    "command": "getTemplateList"
+    "command": "getTemplates"
   }
 }
 ```
@@ -202,152 +202,162 @@ outgoing message
 {
   "parameters": {
     "page": 1,
-    "limit": 2,
-    "count": 2,
-    "pages": 1
+    "limit": 2
   },
   "data": {
-    "templates": [
-      {
-        "id": 1,
-        "uuid": "cbca7dd8-7b94-459a-b690-e72b13a9a364",
-        "name": "Blocked corporates form",
-        "state": "active",
-        "type": "Corporate",
-        "data": [
-          {
-            "type": "header",
-            "label": "Front ID",
-            "access": false,
-            "subtype": "h1"
-          },
-          {
-            "type": "header",
-            "label": "Upload your Front ID please",
-            "access": false,
-            "subtype": "h5"
-          },
-          {
-            "name": "file-1580731039389",
-            "type": "file",
-            "label": "File Upload",
-            "access": false,
-            "subtype": "file",
-            "multiple": false,
-            "required": true,
-            "className": "form-control",
-            "description": "Click to upload"
-          },
-          {
-            "name": "date-1580731177543",
-            "type": "date",
-            "label": "Enter date expired",
-            "access": false,
-            "required": true,
-            "className": "form-control"
-          },
-          {
-            "name": "textarea-1580731238278",
-            "type": "textarea",
-            "label": "Comment",
-            "access": false,
-            "subtype": "textarea",
-            "required": false,
-            "className": "form-control",
-            "maxlength": 250
-          },
-          {
-            "name": "button-1580731067466",
-            "type": "button",
-            "label": "Save",
-            "style": "success",
-            "access": false,
-            "subtype": "button",
-            "className": "btn-success btn"
-          },
-          {
-            "name": "button-1580731082192",
-            "type": "button",
-            "label": "Cancel",
-            "style": "default",
-            "access": false,
-            "subtype": "button",
-            "className": "btn-default btn"
-          }
-        ]
-      },
-      {
-        "id": 2,
-        "uuid": "b88c33d6-40de-40a5-af0f-3ccbda3dae03",
-        "name": "Blocked corporates form",
-        "state": "active",
-        "type": "Corporate",
-        "data": [
-          {
-            "type": "header",
-            "label": "Front ID",
-            "access": false,
-            "subtype": "h1"
-          },
-          {
-            "type": "header",
-            "label": "Upload your Front ID please",
-            "access": false,
-            "subtype": "h5"
-          },
-          {
-            "name": "file-1580731039389",
-            "type": "file",
-            "label": "File Upload",
-            "access": false,
-            "subtype": "file",
-            "multiple": false,
-            "required": true,
-            "className": "form-control",
-            "description": "Click to upload"
-          },
-          {
-            "name": "date-1580731177543",
-            "type": "date",
-            "label": "Enter date expired",
-            "access": false,
-            "required": true,
-            "className": "form-control"
-          },
-          {
-            "name": "textarea-1580731238278",
-            "type": "textarea",
-            "label": "Comment",
-            "access": false,
-            "subtype": "textarea",
-            "required": false,
-            "className": "form-control",
-            "maxlength": 250
-          },
-          {
-            "name": "button-1580731067466",
-            "type": "button",
-            "label": "Save",
-            "style": "success",
-            "access": false,
-            "subtype": "button",
-            "className": "btn-success btn"
-          },
-          {
-            "name": "button-1580731082192",
-            "type": "button",
-            "label": "Cancel",
-            "style": "default",
-            "access": false,
-            "subtype": "button",
-            "className": "btn-default btn"
-          }
-        ]
+    "templates": {
+      "data": [
+        {
+          "id": 3,
+          "uuid": "50a9c26e-850e-4e3d-9ac4-e458116d50da",
+          "name": "Blocked corporates form",
+          "state": "active",
+          "type": "Corporate",
+          "data": [
+            {
+              "type": "header",
+              "label": "Front ID",
+              "access": false,
+              "subtype": "h1"
+            },
+            {
+              "type": "header",
+              "label": "Upload your Front ID please",
+              "access": false,
+              "subtype": "h5"
+            },
+            {
+              "name": "file-1580731039389",
+              "type": "file",
+              "label": "File Upload",
+              "access": false,
+              "subtype": "file",
+              "multiple": false,
+              "required": true,
+              "className": "form-control",
+              "description": "Click to upload"
+            },
+            {
+              "name": "date-1580731177543",
+              "type": "date",
+              "label": "Enter date expired",
+              "access": false,
+              "required": true,
+              "className": "form-control"
+            },
+            {
+              "name": "textarea-1580731238278",
+              "type": "textarea",
+              "label": "Comment",
+              "access": false,
+              "subtype": "textarea",
+              "required": false,
+              "className": "form-control",
+              "maxlength": 250
+            },
+            {
+              "name": "button-1580731067466",
+              "type": "button",
+              "label": "Save",
+              "style": "success",
+              "access": false,
+              "subtype": "button",
+              "className": "btn-success btn"
+            },
+            {
+              "name": "button-1580731082192",
+              "type": "button",
+              "label": "Cancel",
+              "style": "default",
+              "access": false,
+              "subtype": "button",
+              "className": "btn-default btn"
+            }
+          ],
+          "created_at": "2020-02-06 18:38:36+05:00",
+          "updated_at": "2020-02-06 18:38:36+05:00"
+        },
+        {
+          "id": 4,
+          "uuid": "acd46da1-7647-43ca-a406-d02608e5a18b",
+          "name": "Blocked corporates form",
+          "state": "active",
+          "type": "Corporate",
+          "data": [
+            {
+              "type": "header",
+              "label": "Front ID",
+              "access": false,
+              "subtype": "h1"
+            },
+            {
+              "type": "header",
+              "label": "Upload your Front ID please",
+              "access": false,
+              "subtype": "h5"
+            },
+            {
+              "name": "file-1580731039389",
+              "type": "file",
+              "label": "File Upload",
+              "access": false,
+              "subtype": "file",
+              "multiple": false,
+              "required": true,
+              "className": "form-control",
+              "description": "Click to upload"
+            },
+            {
+              "name": "date-1580731177543",
+              "type": "date",
+              "label": "Enter date expired",
+              "access": false,
+              "required": true,
+              "className": "form-control"
+            },
+            {
+              "name": "textarea-1580731238278",
+              "type": "textarea",
+              "label": "Comment",
+              "access": false,
+              "subtype": "textarea",
+              "required": false,
+              "className": "form-control",
+              "maxlength": 250
+            },
+            {
+              "name": "button-1580731067466",
+              "type": "button",
+              "label": "Save",
+              "style": "success",
+              "access": false,
+              "subtype": "button",
+              "className": "btn-success btn"
+            },
+            {
+              "name": "button-1580731082192",
+              "type": "button",
+              "label": "Cancel",
+              "style": "default",
+              "access": false,
+              "subtype": "button",
+              "className": "btn-default btn"
+            }
+          ],
+          "created_at": "2020-02-07 17:38:18+05:00",
+          "updated_at": "2020-02-07 17:38:18+05:00"
+        }
+      ],
+      "pagination": {
+        "page": 1,
+        "limit": 2,
+        "count": 5,
+        "pages": 3
       }
-    ]
+    }
   },
   "headers": {
-    "command": "getTemplateList",
+    "command": "getTemplates",
     "success": true
   }
 }
@@ -376,13 +386,13 @@ outgoing message
 ```json
 {
   "parameters": {
-    "uuid": "cbca7dd8-7b94-459a-b690-e72b13a9a364"
+    "uuid": "b88c33d6-40de-40a5-af0f-3ccbda3dae03"
   },
   "data": {
     "template": {
-      "id": 1,
-      "uuid": "cbca7dd8-7b94-459a-b690-e72b13a9a364",
-      "name": "Blocked corporates form",
+      "id": 2,
+      "uuid": "b88c33d6-40de-40a5-af0f-3ccbda3dae03",
+      "name": "Blocked corporates form updated",
       "state": "active",
       "type": "Corporate",
       "data": [
@@ -391,31 +401,6 @@ outgoing message
           "label": "Front ID",
           "access": false,
           "subtype": "h1"
-        },
-        {
-          "type": "header",
-          "label": "Upload your Front ID please",
-          "access": false,
-          "subtype": "h5"
-        },
-        {
-          "name": "file-1580731039389",
-          "type": "file",
-          "label": "File Upload",
-          "access": false,
-          "subtype": "file",
-          "multiple": false,
-          "required": true,
-          "className": "form-control",
-          "description": "Click to upload"
-        },
-        {
-          "name": "date-1580731177543",
-          "type": "date",
-          "label": "Enter date expired",
-          "access": false,
-          "required": true,
-          "className": "form-control"
         },
         {
           "name": "textarea-1580731238278",
@@ -445,7 +430,9 @@ outgoing message
           "subtype": "button",
           "className": "btn-default btn"
         }
-      ]
+      ],
+      "created_at": "2020-02-06 18:38:35+05:00",
+      "updated_at": "2020-02-07 18:52:47+05:00"
     }
   },
   "headers": {
@@ -732,7 +719,7 @@ outgoing message
 }
 ```
 
-## getFormList
+## getForms
 
 incoming message
 
@@ -740,7 +727,7 @@ incoming message
 {
   "parameters":  {
     "page": 1,
-    "limit": 10
+    "limit": 2
   },
   "data": {
     "user": {
@@ -776,7 +763,7 @@ incoming message
     }
   },
   "headers": {
-    "command": "getFormList"
+    "command": "getForms"
   }
 }
 ```
@@ -787,13 +774,11 @@ outgoing message
 {
   "parameters": {
     "page": 1,
-    "limit": 10,
-    "count": 2,
-    "pages": 1
+    "limit": 2
   },
   "data": {
     "user": {
-      "id": 1,
+      "id": 2,
       "first_name": "Fourteenth",
       "last_name": "Forcard",
       "email": "11141114@quancy.com.sg",
@@ -823,49 +808,163 @@ outgoing message
       "demo": 1,
       "required_documents": null
     },
-    "forms": [
-      {
-        "id": 6,
-        "uuid": "bbd94562-b607-4a07-88e1-93063ba39538",
-        "state": "created",
-        "data": [
-          {
-            "name": "file-1580731039389",
-            "value": "/path_to_saved_file.ext"
+    "forms": {
+      "data": [
+        {
+          "id": 1,
+          "uuid": "b96a9423-b7df-4a31-8bef-dc490238b30c",
+          "client_id": 2,
+          "template_id": 1,
+          "state_id": 1,
+          "data": [
+            {
+              "name": "file-1580731039389",
+              "value": "/path_to_saved_file.ext"
+            },
+            {
+              "name": "date-1580731177543",
+              "value": "2020.04.22"
+            },
+            {
+              "name": "textarea-1580731238278",
+              "value": "Put your text here"
+            }
+          ],
+          "created_at": "2020-02-06 18:25:59+05:00",
+          "updated_at": "2020-02-06 18:25:59+05:00",
+          "template": {
+            "id": 1,
+            "uuid": "cbca7dd8-7b94-459a-b690-e72b13a9a364",
+            "name": "Blocked corporates form updated",
+            "state": "active",
+            "type": "Corporate",
+            "data": [
+              {
+                "type": "header",
+                "label": "Front ID",
+                "access": false,
+                "subtype": "h1"
+              },
+              {
+                "name": "textarea-1580731238278",
+                "type": "textarea",
+                "label": "Comment",
+                "access": false,
+                "subtype": "textarea",
+                "required": false,
+                "className": "form-control",
+                "maxlength": 250
+              },
+              {
+                "name": "button-1580731067466",
+                "type": "button",
+                "label": "Save",
+                "style": "success",
+                "access": false,
+                "subtype": "button",
+                "className": "btn-success btn"
+              },
+              {
+                "name": "button-1580731082192",
+                "type": "button",
+                "label": "Cancel",
+                "style": "default",
+                "access": false,
+                "subtype": "button",
+                "className": "btn-default btn"
+              }
+            ],
+            "created_at": "2020-02-06 18:25:09+05:00",
+            "updated_at": "2020-02-07 17:52:23+05:00"
           },
-          {
-            "name": "date-1580731177543",
-            "value": "2020.04.22"
-          },
-          {
-            "name": "textarea-1580731238278",
-            "value": "Put your text here"
+          "state": {
+            "id": 1,
+            "name": "created"
           }
-        ]
-      },
-      {
-        "id": 7,
-        "uuid": "9b1f60f1-a07d-4925-b26a-86900dd7666f",
-        "state": "created",
-        "data": [
-          {
-            "name": "file-1580731039389",
-            "value": "/path_to_saved_file.ext"
+        },
+        {
+          "id": 2,
+          "uuid": "abf93692-0fca-4950-b107-90215b798371",
+          "client_id": 2,
+          "template_id": 1,
+          "state_id": 1,
+          "data": [
+            {
+              "name": "file-1580731039389",
+              "value": "/path_to_saved_file.ext"
+            },
+            {
+              "name": "date-1580731177543",
+              "value": "2020.04.22"
+            },
+            {
+              "name": "textarea-1580731238278",
+              "value": "Put your text here"
+            }
+          ],
+          "created_at": "2020-02-06 18:28:25+05:00",
+          "updated_at": "2020-02-06 18:28:25+05:00",
+          "template": {
+            "id": 1,
+            "uuid": "cbca7dd8-7b94-459a-b690-e72b13a9a364",
+            "name": "Blocked corporates form updated",
+            "state": "active",
+            "type": "Corporate",
+            "data": [
+              {
+                "type": "header",
+                "label": "Front ID",
+                "access": false,
+                "subtype": "h1"
+              },
+              {
+                "name": "textarea-1580731238278",
+                "type": "textarea",
+                "label": "Comment",
+                "access": false,
+                "subtype": "textarea",
+                "required": false,
+                "className": "form-control",
+                "maxlength": 250
+              },
+              {
+                "name": "button-1580731067466",
+                "type": "button",
+                "label": "Save",
+                "style": "success",
+                "access": false,
+                "subtype": "button",
+                "className": "btn-success btn"
+              },
+              {
+                "name": "button-1580731082192",
+                "type": "button",
+                "label": "Cancel",
+                "style": "default",
+                "access": false,
+                "subtype": "button",
+                "className": "btn-default btn"
+              }
+            ],
+            "created_at": "2020-02-06 18:25:09+05:00",
+            "updated_at": "2020-02-07 17:52:23+05:00"
           },
-          {
-            "name": "date-1580731177543",
-            "value": "2020.04.22"
-          },
-          {
-            "name": "textarea-1580731238278",
-            "value": "Put your text here"
+          "state": {
+            "id": 1,
+            "name": "created"
           }
-        ]
+        }
+      ],
+      "pagination": {
+        "page": 1,
+        "limit": 2,
+        "count": 12,
+        "pages": 6
       }
-    ]
+    }
   },
   "headers": {
-    "command": "getFormList",
+    "command": "getForms",
     "success": true
   }
 }
@@ -878,7 +977,7 @@ incoming message
 ```json
 {
   "parameters":  {
-    "uuid": "7557e178-72b4-43ef-a988-2fd2a3363569"
+    "uuid": "b96a9423-b7df-4a31-8bef-dc490238b30c"
   },
   "data": {},
   "headers": {
@@ -892,13 +991,15 @@ outgoing message
 ```json
 {
   "parameters": {
-    "uuid": "bbd94562-b607-4a07-88e1-93063ba39538"
+    "uuid": "b96a9423-b7df-4a31-8bef-dc490238b30c"
   },
   "data": {
     "form": {
-      "id": 6,
-      "uuid": "bbd94562-b607-4a07-88e1-93063ba39538",
-      "state": "created",
+      "id": 1,
+      "uuid": "b96a9423-b7df-4a31-8bef-dc490238b30c",
+      "client_id": 2,
+      "template_id": 1,
+      "state_id": 1,
       "data": [
         {
           "name": "file-1580731039389",
@@ -912,7 +1013,58 @@ outgoing message
           "name": "textarea-1580731238278",
           "value": "Put your text here"
         }
-      ]
+      ],
+      "created_at": "2020-02-06 18:25:59+05:00",
+      "updated_at": "2020-02-06 18:25:59+05:00",
+      "template": {
+        "id": 1,
+        "uuid": "cbca7dd8-7b94-459a-b690-e72b13a9a364",
+        "name": "Blocked corporates form updated",
+        "state": "active",
+        "type": "Corporate",
+        "data": [
+          {
+            "type": "header",
+            "label": "Front ID",
+            "access": false,
+            "subtype": "h1"
+          },
+          {
+            "name": "textarea-1580731238278",
+            "type": "textarea",
+            "label": "Comment",
+            "access": false,
+            "subtype": "textarea",
+            "required": false,
+            "className": "form-control",
+            "maxlength": 250
+          },
+          {
+            "name": "button-1580731067466",
+            "type": "button",
+            "label": "Save",
+            "style": "success",
+            "access": false,
+            "subtype": "button",
+            "className": "btn-success btn"
+          },
+          {
+            "name": "button-1580731082192",
+            "type": "button",
+            "label": "Cancel",
+            "style": "default",
+            "access": false,
+            "subtype": "button",
+            "className": "btn-default btn"
+          }
+        ],
+        "created_at": "2020-02-06 18:25:09+05:00",
+        "updated_at": "2020-02-07 17:52:23+05:00"
+      },
+      "state": {
+        "id": 1,
+        "name": "created"
+      }
     }
   },
   "headers": {

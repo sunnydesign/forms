@@ -8,16 +8,18 @@ use \Exception;
 
 class Service extends Provider
 {
+    use Paginated;
+
     const LIMIT = 50;
 
     public $availableMethods = [
-        'getTemplateList',
+        'getTemplates',
         'getTemplate',
         'createTemplate',
         'updateTemplate',
         'deleteTemplate',
 
-        'getFormList',
+        'getForms',
         'getForm',
         'createForm',
         'updateForm',
@@ -64,38 +66,15 @@ class Service extends Provider
      * @param object $headers
      * @return object
      */
-    public function getTemplateList(object $parameters, object $data, object $headers): object
+    public function getTemplates(object $parameters, object $data, object $headers): object
     {
-        // Set limit and offset
-        $page = $parameters->page ?? 1;
-        $limit = $parameters->limit ?? self::LIMIT;
-        $offset = $limit * ($page - 1);
+        // Get templates from DB considering client id
+        $templates = new Template();
 
-        // Get templates from DB
-        $templates = Template::take($limit)->skip($offset)->get();
+        if(property_exists($data, 'user') && property_exists($data->user, 'id'))
+            $templates->whereClientId($data->user->id);
 
-        // If found templates
-        if(!empty($templates)) {
-            foreach($templates as $template) {
-                $templates_list[] = [
-                    'id' => $template->id,
-                    'uuid' => $template->uuid,
-                    'name' => $template->name,
-                    'state' => $template->state,
-                    'type' => $template->type,
-                    'data' => json_decode($template->data)
-                ];
-            }
-        }
-
-        $data->templates = $templates_list ?? [];
-
-        // Count and pages
-        $count = $templates->count();
-        $parameters->page = $page;
-        $parameters->limit = $limit;
-        $parameters->count = $count;
-        $parameters->pages = ceil($count / $limit);
+        $data->templates = $this->getPaginated($templates, $parameters);
 
         return $data;
     }
@@ -116,19 +95,7 @@ class Service extends Provider
         $this->checkParameters(['uuid'], $parameters);
 
         // Get template from DB
-        $template = Template::whereUuid($parameters->uuid)->first();
-
-        // If found form
-        if(!empty($template)) {
-            $data->template = [
-                'id' => $template->id,
-                'uuid' => $template->uuid,
-                'name' => $template->name,
-                'state' => $template->state,
-                'type' => $template->type,
-                'data' => json_decode($template->data)
-            ];
-        }
+        $data->template = Template::whereUuid($parameters->uuid)->first();
 
         return $data;
     }
@@ -232,41 +199,15 @@ class Service extends Provider
      * @param object $headers
      * @return object
      */
-    public function getFormList(object $parameters, object $data, object $headers): object
+    public function getForms(object $parameters, object $data, object $headers): object
     {
-        // Set limit and offset
-        $page = $parameters->page ?? 1;
-        $limit = $parameters->limit ?? self::LIMIT;
-        $offset = $limit * ($page - 1);
-
         // Get forms from DB considering client id
-        $forms = Form::take($limit)->skip($offset);
+        $forms = new Form();
 
         if(property_exists($data, 'user') && property_exists($data->user, 'id'))
             $forms->whereClientId($data->user->id);
 
-        $forms = $forms->get();
-
-        // If found forms
-        if(!empty($forms)) {
-            foreach($forms as $form) {
-                $forms_list[] = [
-                    'id' => $form->id,
-                    'uuid' => $form->uuid,
-                    'state' => $form->state->name,
-                    'data' => json_decode($form->data)
-                ];
-            }
-        }
-
-        $data->forms = $forms_list ?? [];
-
-        // Count and pages
-        $count = $forms->count();
-        $parameters->page = $page;
-        $parameters->limit = $limit;
-        $parameters->count = $count;
-        $parameters->pages = ceil($count / $limit);
+        $data->forms = $this->getPaginated($forms->with('template', 'state'), $parameters);
 
         return $data;
     }
@@ -282,22 +223,10 @@ class Service extends Provider
      */
     public function getForm(object $parameters, object $data, object $headers): object
     {
-        $data->form = [];
-
         $this->checkParameters(['uuid'], $parameters);
 
         // Get form from DB
-        $form = Form::whereUuid($parameters->uuid)->first();
-
-        // If found form
-        if(!empty($form)) {
-            $data->form = [
-                'id' => $form->id,
-                'uuid' => $form->uuid,
-                'state' => $form->state->name,
-                'data' => json_decode($form->data)
-            ];
-        }
+        $data->form = Form::whereUuid($parameters->uuid)->with('template', 'state')->first();
 
         return $data;
     }

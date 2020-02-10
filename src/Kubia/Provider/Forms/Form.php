@@ -25,6 +25,16 @@ class Form extends Model
         });
     }
 
+    public function setDataAttribute($value)
+    {
+        $this->attributes['data'] = json_encode($value);
+    }
+
+    public function getDataAttribute()
+    {
+        return json_decode($this->attributes['data']);
+    }
+
     public function state()
     {
         return $this->belongsTo('Kubia\Provider\Forms\State');
