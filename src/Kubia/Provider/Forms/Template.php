@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Template extends Model
 {
-    protected $fillable = ['uuid', 'name', 'state', 'type', 'data'];
+    protected $fillable = ['uuid', 'name', 'state', 'data'];
+    //вместо state сделать active тип bool
     protected $guarded = ['id'];
     protected $dateFormat = 'Y-m-d H:i:sP';
     protected $connection = 'forms';
