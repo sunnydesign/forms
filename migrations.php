@@ -13,7 +13,6 @@ $migrations['20200201'] = function () {
         $table->boolean('active');
         $table->jsonb('data');
         $table->timestampsTz();
-
     });
 
     // states schema
@@ -43,6 +42,7 @@ $migrations['20200201'] = function () {
         $table->foreign('template_id')->references('id')->on('templates')->onDelete('set null');
         $table->foreign('state_id')->references('id')->on('states')->onDelete('set null');
         $table->jsonb('data');
+        $table->text('comment')->nullable();
         $table->timestampsTz();
     });
 

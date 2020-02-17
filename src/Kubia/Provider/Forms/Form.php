@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Form extends Model
 {
-    protected $fillable = ['uuid', 'template_id', 'client_id', 'state_id', 'data'];
+    protected $fillable = ['uuid', 'template_id', 'client_id', 'state_id', 'data', 'comment'];
     protected $guarded = ['id'];
     protected $dateFormat = 'Y-m-d H:i:sP';
     protected $connection = 'forms';
-    public $relations=['template','state'];
+    protected $relations = ['template', 'state'];
 
     public static function boot()
     {

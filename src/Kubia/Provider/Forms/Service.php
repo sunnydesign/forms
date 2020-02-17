@@ -244,8 +244,12 @@ class Service extends Provider
 
         // Save form in to DB
         $form = Form::whereUuid($parameters->uuid)->first();
+        if(!$form)
+            throw BusinessException('Form not found');
+
         $form->state_id = $state->id;
         $form->data = $data->form->data;
+        $form->comment = $data->form->comment;
         $form->save();
 
         $data->form = $form;

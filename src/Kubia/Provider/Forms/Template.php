@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Template extends Model
 {
-    protected $fillable = ['name', 'active', 'data'];
+    protected $fillable = ['uuid', 'name', 'active', 'data'];
     protected $guarded = ['id'];
     protected $dateFormat = 'Y-m-d H:i:sP';
     protected $connection = 'forms';
