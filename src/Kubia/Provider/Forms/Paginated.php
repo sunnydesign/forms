@@ -10,7 +10,7 @@ trait Paginated
 
        // Set limit and offset
        $page = $parameters->page ?? 1;
-       $limit = $parameters->limit ?? self::LIMIT;
+       $limit = $parameters->limit ?? 50;
        $offset = $limit * ($page - 1);
 
        // Get forms from DB considering client id

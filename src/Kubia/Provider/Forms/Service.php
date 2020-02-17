@@ -10,8 +10,6 @@ class Service extends Provider
 {
     use Paginated;
 
-    const LIMIT = 50;
-
     public $availableMethods = [
         'getTemplates',
         'getTemplate',
@@ -46,14 +44,10 @@ class Service extends Provider
         $this->checkParameters(['name', 'state', 'data'], $data->template);
 
         // Save template into DB
-        $template = Template::create([
-            'name' => $data->template->name,
-            'state' => $data->template->state,
-            'type' => $data->template->type,
-            'data' => json_encode($data->template->data)
-        ]);
-
-        $data->template->uuid = $template->uuid;
+        $template = new Template();
+        $template->fill($data->template);
+        $template->save();
+        $data->template = $template;
 
         return $data;
     }
@@ -90,12 +84,13 @@ class Service extends Provider
      */
     public function getTemplate(object $parameters, object $data, object $headers): object
     {
-        $data->template = [];
 
         $this->checkParameters(['uuid'], $parameters);
 
         // Get template from DB
         $data->template = Template::whereUuid($parameters->uuid)->first();
+        if (!$data->template)
+            throw new BusinessException("Template not found");
 
         return $data;
     }
@@ -117,10 +112,7 @@ class Service extends Provider
 
         // Save form in to DB
         $template = Template::whereUuid($parameters->uuid)->first();
-        $template->name = $data->template->name;
-        $template->state = $data->template->state;
-        $template->type = $data->template->type;
-        $template->data = json_encode($data->template->data);
+        $template->fill($data->template);
         $template->save();
 
         $data->template->uuid = $template->uuid;
@@ -178,15 +170,14 @@ class Service extends Provider
             throw new BusinessException('Template not found');
 
         // Save form into DB
-        $form = Form::create([
-            'template_id' => $template->id,
-            'client_id' => $data->user->id,
-            'state_id' => $state->id,
-            'data' => json_encode($data->form->data)
-        ]);
+        $form = Form();
+        $form->template_id = $template->id;
+        $form->client_id = $data->user->id;
+        $form->state_id = $state->id;
+        $form->data = $data->form->data;
+        $form->load('state');
 
-        $data->form->state = $state->name;
-        $data->form->uuid = $form->uuid;
+        $data->form = $form;
 
         return $data;
     }
@@ -253,7 +244,7 @@ class Service extends Provider
         // Save form in to DB
         $form = Form::whereUuid($parameters->uuid)->first();
         $form->state_id = $state->id;
-        $form->data = json_encode($data->form->data);
+        $form->data = $data->form->data;
         $form->save();
 
         $data->form->uuid = $form->uuid;

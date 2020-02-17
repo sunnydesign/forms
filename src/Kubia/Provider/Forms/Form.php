@@ -11,6 +11,7 @@ class Form extends Model
     protected $guarded = ['id'];
     protected $dateFormat = 'Y-m-d H:i:sP';
     protected $connection = 'forms';
+    public $relations=['template','state'];
 
     public static function boot()
     {
