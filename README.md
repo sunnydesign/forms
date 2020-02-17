@@ -27,8 +27,7 @@ incoming message
   "data": {
     "template": {
       "name": "Blocked corporates form",
-      "state": "active",
-      "type": "Corporate",
+      "active": true,
       "data": [
         {
           "type": "header",
@@ -106,8 +105,7 @@ outgoing message
   "data": {
     "template": {
       "name": "Blocked corporates form",
-      "state": "active",
-      "type": "Corporate",
+      "active": true,
       "data": [
         {
           "type": "header",
@@ -169,7 +167,10 @@ outgoing message
           "style": "default"
         }
       ],
-      "uuid": "acd46da1-7647-43ca-a406-d02608e5a18b"
+      "uuid": "77747fbe-0719-45c0-a56c-9fc13665a2cc",
+      "updated_at": "2020-02-17 18:00:15+05:00",
+      "created_at": "2020-02-17 18:00:15+05:00",
+      "id": 5
     }
   },
   "headers": {
@@ -208,11 +209,10 @@ outgoing message
     "templates": {
       "data": [
         {
-          "id": 3,
-          "uuid": "50a9c26e-850e-4e3d-9ac4-e458116d50da",
+          "id": 1,
+          "uuid": "930e5853-701a-4c88-86f0-df020cf51232",
           "name": "Blocked corporates form",
-          "state": "active",
-          "type": "Corporate",
+          "active": true,
           "data": [
             {
               "type": "header",
@@ -274,15 +274,14 @@ outgoing message
               "className": "btn-default btn"
             }
           ],
-          "created_at": "2020-02-06 18:38:36+05:00",
-          "updated_at": "2020-02-06 18:38:36+05:00"
+          "created_at": "2020-02-17 17:54:50+05:00",
+          "updated_at": "2020-02-17 17:54:50+05:00"
         },
         {
-          "id": 4,
-          "uuid": "acd46da1-7647-43ca-a406-d02608e5a18b",
+          "id": 2,
+          "uuid": "8cfe5d19-326f-4d2f-8c09-8f24b55b1a0a",
           "name": "Blocked corporates form",
-          "state": "active",
-          "type": "Corporate",
+          "active": true,
           "data": [
             {
               "type": "header",
@@ -344,8 +343,8 @@ outgoing message
               "className": "btn-default btn"
             }
           ],
-          "created_at": "2020-02-07 17:38:18+05:00",
-          "updated_at": "2020-02-07 17:38:18+05:00"
+          "created_at": "2020-02-17 17:57:48+05:00",
+          "updated_at": "2020-02-17 17:57:48+05:00"
         }
       ],
       "pagination": {
@@ -370,7 +369,7 @@ incoming message
 ```json
 {
   "parameters":  {
-    "uuid": "b88c33d6-40de-40a5-af0f-3ccbda3dae03"
+    "uuid": "8cfe5d19-326f-4d2f-8c09-8f24b55b1a0a"
   },
   "data": {},
   "headers": {
@@ -386,21 +385,45 @@ outgoing message
 ```json
 {
   "parameters": {
-    "uuid": "b88c33d6-40de-40a5-af0f-3ccbda3dae03"
+    "uuid": "8cfe5d19-326f-4d2f-8c09-8f24b55b1a0a"
   },
   "data": {
     "template": {
       "id": 2,
-      "uuid": "b88c33d6-40de-40a5-af0f-3ccbda3dae03",
-      "name": "Blocked corporates form updated",
-      "state": "active",
-      "type": "Corporate",
+      "uuid": "8cfe5d19-326f-4d2f-8c09-8f24b55b1a0a",
+      "name": "Blocked corporates form",
+      "active": true,
       "data": [
         {
           "type": "header",
           "label": "Front ID",
           "access": false,
           "subtype": "h1"
+        },
+        {
+          "type": "header",
+          "label": "Upload your Front ID please",
+          "access": false,
+          "subtype": "h5"
+        },
+        {
+          "name": "file-1580731039389",
+          "type": "file",
+          "label": "File Upload",
+          "access": false,
+          "subtype": "file",
+          "multiple": false,
+          "required": true,
+          "className": "form-control",
+          "description": "Click to upload"
+        },
+        {
+          "name": "date-1580731177543",
+          "type": "date",
+          "label": "Enter date expired",
+          "access": false,
+          "required": true,
+          "className": "form-control"
         },
         {
           "name": "textarea-1580731238278",
@@ -431,8 +454,8 @@ outgoing message
           "className": "btn-default btn"
         }
       ],
-      "created_at": "2020-02-06 18:38:35+05:00",
-      "updated_at": "2020-02-07 18:52:47+05:00"
+      "created_at": "2020-02-17 17:57:48+05:00",
+      "updated_at": "2020-02-17 17:57:48+05:00"
     }
   },
   "headers": {
@@ -449,13 +472,12 @@ incoming message
 ```json
 {
   "parameters": {
-    "uuid": "b88c33d6-40de-40a5-af0f-3ccbda3dae03"
+    "uuid": "8cfe5d19-326f-4d2f-8c09-8f24b55b1a0a"
   },
   "data": {
     "template": {
       "name": "Blocked corporates form updated",
-      "state": "active",
-      "type": "Corporate",
+      "active": true,
       "data": [
         {
           "type": "header",
@@ -504,13 +526,14 @@ outgoing message
 ```json
 {
   "parameters": {
-    "uuid": "cbca7dd8-7b94-459a-b690-e72b13a9a364"
+    "uuid": "8cfe5d19-326f-4d2f-8c09-8f24b55b1a0a"
   },
   "data": {
     "template": {
+      "id": 2,
+      "uuid": "8cfe5d19-326f-4d2f-8c09-8f24b55b1a0a",
       "name": "Blocked corporates form updated",
-      "state": "active",
-      "type": "Corporate",
+      "active": true,
       "data": [
         {
           "type": "header",
@@ -547,7 +570,8 @@ outgoing message
           "style": "default"
         }
       ],
-      "uuid": "cbca7dd8-7b94-459a-b690-e72b13a9a364"
+      "created_at": "2020-02-17 17:57:48+05:00",
+      "updated_at": "2020-02-17 18:04:23+05:00"
     }
   },
   "headers": {
@@ -597,7 +621,7 @@ incoming message
 ```json
 {
   "parameters": {
-    "uuid": "50a9c26e-850e-4e3d-9ac4-e458116d50da"
+    "uuid": "8cfe5d19-326f-4d2f-8c09-8f24b55b1a0a"
   },
   "data": {
     "user": {
@@ -659,7 +683,7 @@ outgoing message
 ```json
 {
   "parameters": {
-    "uuid": "50a9c26e-850e-4e3d-9ac4-e458116d50da"
+    "uuid": "8cfe5d19-326f-4d2f-8c09-8f24b55b1a0a"
   },
   "data": {
     "user": {
@@ -694,6 +718,9 @@ outgoing message
       "required_documents": null
     },
     "form": {
+      "template_id": 2,
+      "client_id": 2,
+      "state_id": 1,
       "data": [
         {
           "name": "file-1580731039389",
@@ -708,8 +735,14 @@ outgoing message
           "value": "Put your text here"
         }
       ],
-      "state": "created",
-      "uuid": "7557e178-72b4-43ef-a988-2fd2a3363569"
+      "uuid": "c4b92ec7-9448-4b48-9c18-1bb8eadabac4",
+      "updated_at": "2020-02-17 18:13:14+05:00",
+      "created_at": "2020-02-17 18:13:14+05:00",
+      "id": 1,
+      "state": {
+        "id": 1,
+        "name": "created"
+      }
     }
   },
   "headers": {
@@ -812,9 +845,9 @@ outgoing message
       "data": [
         {
           "id": 1,
-          "uuid": "b96a9423-b7df-4a31-8bef-dc490238b30c",
+          "uuid": "c4b92ec7-9448-4b48-9c18-1bb8eadabac4",
           "client_id": 2,
-          "template_id": 1,
+          "template_id": 2,
           "state_id": 1,
           "data": [
             {
@@ -830,14 +863,13 @@ outgoing message
               "value": "Put your text here"
             }
           ],
-          "created_at": "2020-02-06 18:25:59+05:00",
-          "updated_at": "2020-02-06 18:25:59+05:00",
+          "created_at": "2020-02-17 18:13:14+05:00",
+          "updated_at": "2020-02-17 18:13:14+05:00",
           "template": {
-            "id": 1,
-            "uuid": "cbca7dd8-7b94-459a-b690-e72b13a9a364",
+            "id": 2,
+            "uuid": "8cfe5d19-326f-4d2f-8c09-8f24b55b1a0a",
             "name": "Blocked corporates form updated",
-            "state": "active",
-            "type": "Corporate",
+            "active": true,
             "data": [
               {
                 "type": "header",
@@ -874,80 +906,8 @@ outgoing message
                 "className": "btn-default btn"
               }
             ],
-            "created_at": "2020-02-06 18:25:09+05:00",
-            "updated_at": "2020-02-07 17:52:23+05:00"
-          },
-          "state": {
-            "id": 1,
-            "name": "created"
-          }
-        },
-        {
-          "id": 2,
-          "uuid": "abf93692-0fca-4950-b107-90215b798371",
-          "client_id": 2,
-          "template_id": 1,
-          "state_id": 1,
-          "data": [
-            {
-              "name": "file-1580731039389",
-              "value": "/path_to_saved_file.ext"
-            },
-            {
-              "name": "date-1580731177543",
-              "value": "2020.04.22"
-            },
-            {
-              "name": "textarea-1580731238278",
-              "value": "Put your text here"
-            }
-          ],
-          "created_at": "2020-02-06 18:28:25+05:00",
-          "updated_at": "2020-02-06 18:28:25+05:00",
-          "template": {
-            "id": 1,
-            "uuid": "cbca7dd8-7b94-459a-b690-e72b13a9a364",
-            "name": "Blocked corporates form updated",
-            "state": "active",
-            "type": "Corporate",
-            "data": [
-              {
-                "type": "header",
-                "label": "Front ID",
-                "access": false,
-                "subtype": "h1"
-              },
-              {
-                "name": "textarea-1580731238278",
-                "type": "textarea",
-                "label": "Comment",
-                "access": false,
-                "subtype": "textarea",
-                "required": false,
-                "className": "form-control",
-                "maxlength": 250
-              },
-              {
-                "name": "button-1580731067466",
-                "type": "button",
-                "label": "Save",
-                "style": "success",
-                "access": false,
-                "subtype": "button",
-                "className": "btn-success btn"
-              },
-              {
-                "name": "button-1580731082192",
-                "type": "button",
-                "label": "Cancel",
-                "style": "default",
-                "access": false,
-                "subtype": "button",
-                "className": "btn-default btn"
-              }
-            ],
-            "created_at": "2020-02-06 18:25:09+05:00",
-            "updated_at": "2020-02-07 17:52:23+05:00"
+            "created_at": "2020-02-17 17:57:48+05:00",
+            "updated_at": "2020-02-17 18:04:23+05:00"
           },
           "state": {
             "id": 1,
@@ -958,8 +918,8 @@ outgoing message
       "pagination": {
         "page": 1,
         "limit": 2,
-        "count": 12,
-        "pages": 6
+        "count": 1,
+        "pages": 1
       }
     }
   },
@@ -977,7 +937,7 @@ incoming message
 ```json
 {
   "parameters":  {
-    "uuid": "b96a9423-b7df-4a31-8bef-dc490238b30c"
+    "uuid": "c4b92ec7-9448-4b48-9c18-1bb8eadabac4"
   },
   "data": {},
   "headers": {
@@ -991,14 +951,14 @@ outgoing message
 ```json
 {
   "parameters": {
-    "uuid": "b96a9423-b7df-4a31-8bef-dc490238b30c"
+    "uuid": "c4b92ec7-9448-4b48-9c18-1bb8eadabac4"
   },
   "data": {
     "form": {
       "id": 1,
-      "uuid": "b96a9423-b7df-4a31-8bef-dc490238b30c",
+      "uuid": "c4b92ec7-9448-4b48-9c18-1bb8eadabac4",
       "client_id": 2,
-      "template_id": 1,
+      "template_id": 2,
       "state_id": 1,
       "data": [
         {
@@ -1014,14 +974,13 @@ outgoing message
           "value": "Put your text here"
         }
       ],
-      "created_at": "2020-02-06 18:25:59+05:00",
-      "updated_at": "2020-02-06 18:25:59+05:00",
+      "created_at": "2020-02-17 18:13:14+05:00",
+      "updated_at": "2020-02-17 18:13:14+05:00",
       "template": {
-        "id": 1,
-        "uuid": "cbca7dd8-7b94-459a-b690-e72b13a9a364",
+        "id": 2,
+        "uuid": "8cfe5d19-326f-4d2f-8c09-8f24b55b1a0a",
         "name": "Blocked corporates form updated",
-        "state": "active",
-        "type": "Corporate",
+        "active": true,
         "data": [
           {
             "type": "header",
@@ -1058,8 +1017,8 @@ outgoing message
             "className": "btn-default btn"
           }
         ],
-        "created_at": "2020-02-06 18:25:09+05:00",
-        "updated_at": "2020-02-07 17:52:23+05:00"
+        "created_at": "2020-02-17 17:57:48+05:00",
+        "updated_at": "2020-02-17 18:04:23+05:00"
       },
       "state": {
         "id": 1,
@@ -1081,7 +1040,7 @@ incoming message
 ```json
 {
   "parameters": {
-    "uuid": "7557e178-72b4-43ef-a988-2fd2a3363569"
+    "uuid": "c4b92ec7-9448-4b48-9c18-1bb8eadabac4"
   },
   "data": {
     "form": {
@@ -1113,10 +1072,15 @@ outgoing message
 ```json
 {
   "parameters": {
-    "uuid": "bbd94562-b607-4a07-88e1-93063ba39538"
+    "uuid": "c4b92ec7-9448-4b48-9c18-1bb8eadabac4"
   },
   "data": {
     "form": {
+      "id": 1,
+      "uuid": "c4b92ec7-9448-4b48-9c18-1bb8eadabac4",
+      "client_id": 2,
+      "template_id": 2,
+      "state_id": 2,
       "data": [
         {
           "name": "file-1580731039389",
@@ -1131,8 +1095,8 @@ outgoing message
           "value": "Put your text here"
         }
       ],
-      "state": "filled",
-      "uuid": "bbd94562-b607-4a07-88e1-93063ba39538"
+      "created_at": "2020-02-17 18:13:14+05:00",
+      "updated_at": "2020-02-17 18:17:26+05:00"
     }
   },
   "headers": {

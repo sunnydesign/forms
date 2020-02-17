@@ -41,12 +41,13 @@ class Service extends Provider
     public function createTemplate(object $parameters, object $data, object $headers): object
     {
         $this->checkParameters(['template'], $data);
-        $this->checkParameters(['name', 'state', 'data'], $data->template);
+        $this->checkParameters(['name', 'active', 'data'], $data->template);
 
         // Save template into DB
         $template = new Template();
-        $template->fill($data->template);
+        $template->fill((array)$data->template);
         $template->save();
+
         $data->template = $template;
 
         return $data;
@@ -84,7 +85,6 @@ class Service extends Provider
      */
     public function getTemplate(object $parameters, object $data, object $headers): object
     {
-
         $this->checkParameters(['uuid'], $parameters);
 
         // Get template from DB
@@ -107,15 +107,15 @@ class Service extends Provider
     public function updateTemplate(object $parameters, object $data, object $headers): object
     {
         $this->checkParameters(['template'], $data);
-        $this->checkParameters(['name', 'state', 'data'], $data->template);
+        $this->checkParameters(['name', 'active', 'data'], $data->template);
         $this->checkParameters(['uuid'], $parameters);
 
-        // Save form in to DB
+        // Save template in to DB
         $template = Template::whereUuid($parameters->uuid)->first();
-        $template->fill($data->template);
+        $template->fill((array)$data->template);
         $template->save();
 
-        $data->template->uuid = $template->uuid;
+        $data->template = $template;
 
         return $data;
     }
@@ -170,11 +170,12 @@ class Service extends Provider
             throw new BusinessException('Template not found');
 
         // Save form into DB
-        $form = Form();
+        $form = new Form();
         $form->template_id = $template->id;
         $form->client_id = $data->user->id;
         $form->state_id = $state->id;
         $form->data = $data->form->data;
+        $form->save();
         $form->load('state');
 
         $data->form = $form;
@@ -247,7 +248,7 @@ class Service extends Provider
         $form->data = $data->form->data;
         $form->save();
 
-        $data->form->uuid = $form->uuid;
+        $data->form = $form;
 
         return $data;
     }

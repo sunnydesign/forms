@@ -10,8 +10,7 @@ $migrations['20200201'] = function () {
         $table->increments('id');
         $table->uuid('uuid');
         $table->string('name');
-        $table->string('state');
-        $table->string('type');
+        $table->boolean('active');
         $table->jsonb('data');
         $table->timestampsTz();
 

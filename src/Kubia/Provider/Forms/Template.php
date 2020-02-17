@@ -7,11 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Template extends Model
 {
-    protected $fillable = ['uuid', 'name', 'state', 'data'];
-    //вместо state сделать active тип bool
+    protected $fillable = ['name', 'active', 'data'];
     protected $guarded = ['id'];
     protected $dateFormat = 'Y-m-d H:i:sP';
-    protected $connection = 'forms';
+    protected $connection = DB_CONNECTION;
 
     public static function boot()
     {
